@@ -1,6 +1,7 @@
 edu\unicauca\apliweb\persistence\entities\Mediatype_.class
 edu\unicauca\apliweb\persistence\entities\Track_.class
 edu\unicauca\apliweb\persistence\jpa\GenreJpaController.class
+edu\unicauca\apliweb\control\ServletAppAlbum.class
 edu\unicauca\apliweb\persistence\entities\Artist.class
 edu\unicauca\apliweb\persistence\entities\Employee.class
 edu\unicauca\apliweb\persistence\entities\Playlist.class

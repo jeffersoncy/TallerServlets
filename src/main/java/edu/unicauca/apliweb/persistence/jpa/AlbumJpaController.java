@@ -88,6 +88,7 @@ public class AlbumJpaController implements Serializable {
             Album persistentAlbum = em.find(Album.class, album.getAlbumId());
             Artist artistIdOld = persistentAlbum.getArtistId();
             Artist artistIdNew = album.getArtistId();
+            /*
             List<Track> trackListOld = persistentAlbum.getTrackList();
             List<Track> trackListNew = album.getTrackList();
             if (artistIdNew != null) {
@@ -100,7 +101,7 @@ public class AlbumJpaController implements Serializable {
                 attachedTrackListNew.add(trackListNewTrackToAttach);
             }
             trackListNew = attachedTrackListNew;
-            album.setTrackList(trackListNew);
+            album.setTrackList(trackListNew);*/
             album = em.merge(album);
             if (artistIdOld != null && !artistIdOld.equals(artistIdNew)) {
                 artistIdOld.getAlbumList().remove(album);
@@ -109,7 +110,7 @@ public class AlbumJpaController implements Serializable {
             if (artistIdNew != null && !artistIdNew.equals(artistIdOld)) {
                 artistIdNew.getAlbumList().add(album);
                 artistIdNew = em.merge(artistIdNew);
-            }
+            }/*
             for (Track trackListOldTrack : trackListOld) {
                 if (!trackListNew.contains(trackListOldTrack)) {
                     trackListOldTrack.setAlbumId(null);
@@ -126,7 +127,7 @@ public class AlbumJpaController implements Serializable {
                         oldAlbumIdOfTrackListNewTrack = em.merge(oldAlbumIdOfTrackListNewTrack);
                     }
                 }
-            }
+            }*/
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();

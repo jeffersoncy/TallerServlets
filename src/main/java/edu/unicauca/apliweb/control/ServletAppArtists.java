@@ -60,6 +60,7 @@ public class ServletAppArtists extends HttpServlet {
             throws ServletException, IOException, IllegalOrphanException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getServletPath();
+        System.out.println("accion servlet app artist "+action);
 //toma la acción solicitada desde la petición enviada al Servlet
         try {
             switch (action) {
