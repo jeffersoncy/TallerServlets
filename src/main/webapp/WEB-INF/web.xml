@@ -4,9 +4,17 @@
         <servlet-name>ServletAppGeneral</servlet-name>
         <servlet-class>edu.unicauca.apliweb.control.ServletAppGeneral</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletAppArtists</servlet-name>
+        <servlet-class>edu.unicauca.apliweb.control.ServletAppArtists</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletAppGeneral</servlet-name>
         <url-pattern>/ServletAppGeneral</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAppArtists</servlet-name>
+        <url-pattern>/ServletAppArtists</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

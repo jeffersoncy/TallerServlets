@@ -14,6 +14,7 @@ import edu.unicauca.apliweb.persistence.entities.Artist;
 import edu.unicauca.apliweb.persistence.jpa.exceptions.IllegalOrphanException;
 import edu.unicauca.apliweb.persistence.jpa.exceptions.NonexistentEntityException;
 import edu.unicauca.apliweb.persistence.jpa.exceptions.PreexistingEntityException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -77,39 +78,7 @@ public class ArtistJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Artist persistentArtist = em.find(Artist.class, artist.getArtistId());
-            List<Album> albumListOld = persistentArtist.getAlbumList();
-            List<Album> albumListNew = artist.getAlbumList();
-            List<String> illegalOrphanMessages = null;
-            for (Album albumListOldAlbum : albumListOld) {
-                if (!albumListNew.contains(albumListOldAlbum)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Album " + albumListOldAlbum + " since its artistId field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            List<Album> attachedAlbumListNew = new ArrayList<Album>();
-            for (Album albumListNewAlbumToAttach : albumListNew) {
-                albumListNewAlbumToAttach = em.getReference(albumListNewAlbumToAttach.getClass(), albumListNewAlbumToAttach.getAlbumId());
-                attachedAlbumListNew.add(albumListNewAlbumToAttach);
-            }
-            albumListNew = attachedAlbumListNew;
-            artist.setAlbumList(albumListNew);
             artist = em.merge(artist);
-            for (Album albumListNewAlbum : albumListNew) {
-                if (!albumListOld.contains(albumListNewAlbum)) {
-                    Artist oldArtistIdOfAlbumListNewAlbum = albumListNewAlbum.getArtistId();
-                    albumListNewAlbum.setArtistId(artist);
-                    albumListNewAlbum = em.merge(albumListNewAlbum);
-                    if (oldArtistIdOfAlbumListNewAlbum != null && !oldArtistIdOfAlbumListNewAlbum.equals(artist)) {
-                        oldArtistIdOfAlbumListNewAlbum.getAlbumList().remove(albumListNewAlbum);
-                        oldArtistIdOfAlbumListNewAlbum = em.merge(oldArtistIdOfAlbumListNewAlbum);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -129,33 +98,30 @@ public class ArtistJpaController implements Serializable {
 
     public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
+        em = getEntityManager();
+        em.getTransaction().begin();
+        Artist artist;
         try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            Artist artist;
-            try {
-                artist = em.getReference(Artist.class, id);
-                artist.getArtistId();
-            } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The artist with id " + id + " no longer exists.", enfe);
+            artist = em.getReference(Artist.class, id);
+            artist.getArtistId();
+        } catch (EntityNotFoundException enfe) {
+            throw new NonexistentEntityException("The artist with id " + id + " no longer exists.", enfe);
+        }
+        List<String> illegalOrphanMessages = null;
+        List<Album> albumListOrphanCheck = artist.getAlbumList();
+        for (Album albumListOrphanCheckAlbum : albumListOrphanCheck) {
+            if (illegalOrphanMessages == null) {
+                illegalOrphanMessages = new ArrayList<String>();
             }
-            List<String> illegalOrphanMessages = null;
-            List<Album> albumListOrphanCheck = artist.getAlbumList();
-            for (Album albumListOrphanCheckAlbum : albumListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Artist (" + artist + ") cannot be destroyed since the Album " + albumListOrphanCheckAlbum + " in its albumList field has a non-nullable artistId field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            em.remove(artist);
-            em.getTransaction().commit();
-        } finally {
-            if (em != null) {
-                em.close();
-            }
+            illegalOrphanMessages.add("This Artist (" + artist + ") cannot be destroyed since the Album " + albumListOrphanCheckAlbum + " in its albumList field has a non-nullable artistId field.");
+        }
+        if (illegalOrphanMessages != null) {
+            //throw new IllegalOrphanException(illegalOrphanMessages);
+        }
+        em.remove(artist);
+        em.getTransaction().commit();
+        if (em != null) {
+            em.close();
         }
     }
 

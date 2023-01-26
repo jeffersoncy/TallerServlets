@@ -11,8 +11,10 @@ edu\unicauca\apliweb\persistence\jpa\TrackJpaController.class
 edu\unicauca\apliweb\persistence\entities\Album_.class
 edu\unicauca\apliweb\persistence\jpa\EmployeeJpaController.class
 edu\unicauca\apliweb\persistence\entities\Invoice_.class
+edu\unicauca\apliweb\control\ServletAppArtists.class
 edu\unicauca\apliweb\persistence\jpa\CustomerJpaController.class
 edu\unicauca\apliweb\persistence\entities\Employee_.class
+edu\unicauca\apliweb\control\ServletAppGeneral.class
 edu\unicauca\apliweb\persistence\entities\Artist_.class
 edu\unicauca\apliweb\persistence\entities\Invoiceline_.class
 edu\unicauca\apliweb\persistence\entities\Album.class
