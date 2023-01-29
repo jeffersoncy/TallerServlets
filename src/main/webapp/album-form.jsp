@@ -15,13 +15,18 @@
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
+            <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #092168">
                 <div>
-                    <a href="https://www.unicauca.edu.co" class="navbar-brand"> Aplicación Ejemplo Apliweb </a>
+                    <a href="https://www.unicauca.edu.co" class="navbar-brand"> App Music </a>
                 </div>
                 <ul class="navbar-nav">
-                    <li><a href="<%=request.getContextPath()%>/albums/list" class="nav-link">Lista Clientes</a></li>
+                    <li><a href="<%=request.getContextPath()%>/list" class="nav-link">Lista Artist</a></li>
                 </ul>
+                
+                <ul class="navbar-nav">
+                    <li><a href="<%=request.getContextPath()%>/albums" class="nav-link">Lista Albums</a></li>
+                </ul>
+                
             </nav>
         </header>
         <br>
@@ -29,20 +34,20 @@
             <div class="card">
                 <div class="card-body">
                     <c:if test="${album != null}">
-                        <form action="albums/update" method="post">
+                        <form action="updatealbum" method="post">
                         </c:if>
 
                         <c:if test="${album == null}">
-                            <form action="albums/insert" method="post">
+                            <form action="insertalbum" method="post">
                             </c:if>
                             <caption>
                                 <h2>
                                     <c:if test="${album != null}">
-                                        Editar Cliente
+                                        Editar Album
                                     </c:if>
 
                                     <c:if test="${album == null}">
-                                        Nuevo Cliente
+                                        Nuevo Album
                                     </c:if>
                                 </h2>
                             </caption>

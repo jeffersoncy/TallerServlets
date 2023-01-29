@@ -14,14 +14,33 @@
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
+            <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #092168">
                 <div>
                     <a href="https://www.unicauca.edu.co" class="navbar-brand"> App Music </a>
                 </div>
                 <ul class="navbar-nav">
-                    <li><a href="<%=request.getContextPath()%>/albums/list" class="nav-link">Lista Album</a></li>
+                    <li><a href="<%=request.getContextPath()%>/list" class="nav-link">Lista Artist</a></li>
                 </ul>
+                
+                <ul class="navbar-nav">
+                    <li><a href="<%=request.getContextPath()%>/albums" class="nav-link">Lista Albums</a></li>
+                </ul>
+                
             </nav>
+            <c:if test="${loginError != null}">
+                <!-- Showing alert -->
+                <div id="alert" class="alert alert-danger">
+                    ${loginError}
+                </div>
+
+                <script type="text/javascript">
+                    setTimeout(function () {
+
+                        // Closing the alert
+                        $('#alert').alert('close');
+                    }, 5000);
+                </script>
+            </c:if>
         </header>
         <br>
         <div class="row">
@@ -30,7 +49,7 @@
                 <h3 class="text-center">Lista de Albums</h3>
                 <hr>
                 <div class="container text-left">
-                    <a href="<%=request.getContextPath()%>/new" class="btn btn-success">Nuevo Album</a>
+                    <a href="<%=request.getContextPath()%>/newalbum" class="btn btn-success">Nuevo Album</a>
                 </div>
                 <br>
                 <table class="table table-bordered">
@@ -57,8 +76,8 @@
                                     <c:out value="${album.artistId.name}" />
                                 </td>
                                 <td>
-                                    <a href="albums/edit?id=<c:out value='${album.albumId}' />">Editar</a>
-                                    <a href="albums/delete?id=<c:out value='${album.albumId}' />">Eliminar</a>
+                                    <a href="editalbum?id=<c:out value='${album.albumId}' />">Editar</a>
+                                    <a href="deletealbum?id=<c:out value='${album.albumId}' />">Eliminar</a>
                                 </td>
                             </tr>
                         </c:forEach>

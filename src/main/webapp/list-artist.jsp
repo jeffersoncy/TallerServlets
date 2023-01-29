@@ -16,13 +16,18 @@
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
+            <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #092168">
                 <div>
                     <a href="https://www.unicauca.edu.co" class="navbar-brand"> App Music </a>
                 </div>
                 <ul class="navbar-nav">
                     <li><a href="<%=request.getContextPath()%>/list" class="nav-link">Lista Artist</a></li>
                 </ul>
+                
+                <ul class="navbar-nav">
+                    <li><a href="<%=request.getContextPath()%>/albums" class="nav-link">Lista Albums</a></li>
+                </ul>
+                
             </nav>
             <c:if test="${loginError != null}">
                 <!-- Showing alert -->

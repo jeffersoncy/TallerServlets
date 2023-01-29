@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Danny
  */
-@WebServlet("/albums")
+@WebServlet("/pruebasdasasad")
 public class ServletAppAlbum extends HttpServlet {
     
     private AlbumJpaController albumJPA;
@@ -52,7 +52,7 @@ public class ServletAppAlbum extends HttpServlet {
         try {
             switch (action) {
                 case "/albums/new":
-                    showNewForm(request, response);
+                    showNewFormAlbum(request, response);
                     break;
                 case "/albums/insert":
                     insertAlbum(request, response);
@@ -62,7 +62,7 @@ public class ServletAppAlbum extends HttpServlet {
                     break;
                 case "/albums/edit":
                     System.out.println("Editando album");
-                    showEditForm(request, response);
+                    showEditFormAlbum(request, response);
                     break;
                 case "/albums/update":
                     updateAlbum(request, response);
@@ -75,22 +75,7 @@ public class ServletAppAlbum extends HttpServlet {
         } catch (SQLException ex) {
             throw new ServletException(ex);
         }
-        /*try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Aplicación Clientes Web con JPA</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Lista de Clientes en el Servlet " + request.getContextPath() + "</h1>");
-            List<Album> listaAlbums = albumJPA.findAlbumEntities();
-            for (Album album : listaAlbums) {
-                System.out.println("Album: " + album.getTitle() +" Artista: " + album.getArtistId().getName());
-                out.println("Album "+album.getTitle()+ " Artista: "+album.getArtistId().getName()+"<br>");
-            }
-            out.println("</body>");
-            out.println("</html>");
-        }*/
+        
     }
     
     @Override
@@ -113,7 +98,7 @@ public class ServletAppAlbum extends HttpServlet {
     }
     
     //muestra el formulario para crear un nuevo album
-    private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void showNewFormAlbum(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         List<Artist> listaArtistas = artistJPA.findArtistEntities();
         request.setAttribute("listaArtist",listaArtistas );
@@ -122,7 +107,7 @@ public class ServletAppAlbum extends HttpServlet {
     }
     
     //muestra el formulario para editar un album
-    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+    private void showEditFormAlbum(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         //toma el id del album a ser editaro
         int id = Integer.parseInt(request.getParameter("id"));
          List<Artist> listaArtistas = artistJPA.findArtistEntities();

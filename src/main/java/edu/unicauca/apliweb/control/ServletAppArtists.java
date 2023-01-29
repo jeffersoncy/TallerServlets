@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jefer
  */
-@WebServlet("/")
+@WebServlet("/pruebasdas")
 public class ServletAppArtists extends HttpServlet {
 
     private ArtistJpaController artistJPA;
