@@ -22,11 +22,11 @@
                 <ul class="navbar-nav">
                     <li><a href="<%=request.getContextPath()%>/list" class="nav-link">Lista Artist</a></li>
                 </ul>
-                
+
                 <ul class="navbar-nav">
                     <li><a href="<%=request.getContextPath()%>/albums" class="nav-link">Lista Albums</a></li>
                 </ul>
-                
+
             </nav>
         </header>
         <br>
@@ -60,7 +60,7 @@
                                 <fieldset class="form-group">
                                     <label>Id del album</label> <input type="number" value="<c:out value='${album.albumId}' />"
                                                                        class="form-control" name="albumId" required="required" />
-                                    
+
                                 </fieldset>
                             </c:if>
                             <fieldset class="form-group">
@@ -72,7 +72,7 @@
                                 <label>Artista</label>
                                 <br>
                                 <select name="artist" class="form-select" aria-label="seleccione">
-                                    
+
                                     <c:if test="${album == null}">
                                         <option selected>Seleccione un artista</option>
                                     </c:if>
@@ -85,6 +85,7 @@
                                 </select>
                             </fieldset>
                             <button type="submit" class="btn btn-success">Guardar</button>
+                            <a href="<%=request.getContextPath()%>/albums" class="btn btn-danger">Cancelar</a>
                         </form>
                 </div>
             </div>

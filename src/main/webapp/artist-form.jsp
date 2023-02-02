@@ -88,6 +88,7 @@
                                                              class="form-control" name="Name" required="required">
                             </fieldset>
                             <button type="submit" class="btn btn-success">Guardar</button>
+                            <a href="<%=request.getContextPath()%>/" class="btn btn-danger">Cancelar</a>
                         </form>
                 </div>
             </div>
