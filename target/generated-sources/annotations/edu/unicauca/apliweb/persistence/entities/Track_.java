@@ -11,7 +11,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2023-02-06T11:30:47")
+@Generated(value="EclipseLink-2.7.10.v20211216-rNA", date="2023-02-06T13:41:50")
 @StaticMetamodel(Track.class)
 public class Track_ { 
 
