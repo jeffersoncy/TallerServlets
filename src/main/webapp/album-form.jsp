@@ -1,7 +1,7 @@
 <%-- 
     Document   : album-form
     Created on : 25/01/2023, 2:44:18 p. m.
-    Author     : Danny
+    Author     : Jefferson Eduardo Campo - Hector Esteban Coral- Danny Alberto Diaz
 --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -17,7 +17,7 @@
         <header>
             <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #092168">
                 <div>
-                    <a href="https://www.unicauca.edu.co" class="navbar-brand"> App Music </a>
+                    <a href="#" class="navbar-brand"> App Music </a>
                 </div>
                 <ul class="navbar-nav">
                     <li><a href="<%=request.getContextPath()%>/list" class="nav-link">Lista Artist</a></li>
@@ -26,8 +26,21 @@
                 <ul class="navbar-nav">
                     <li><a href="<%=request.getContextPath()%>/albums" class="nav-link">Lista Albums</a></li>
                 </ul>
-
             </nav>
+            <c:if test="${loginError != null}">
+                <!-- Showing alert -->
+                <div id="alert" class="alert alert-danger">
+                    ${loginError}
+                </div>
+
+                <script type="text/javascript">
+                    setTimeout(function () {
+
+                        // Closing the alert
+                        $('#alert').alert('close');
+                    }, 5000);
+                </script>
+            </c:if>
         </header>
         <br>
         <div class="container col-md-5">
@@ -71,10 +84,10 @@
                             <fieldset class="form-group">
                                 <label>Artista</label>
                                 <br>
-                                <select name="artist" class="form-select" aria-label="seleccione" style="width: 100%">
+                                <select name="artist" class="form-select" aria-label="seleccione" style="width: 100%" required>
 
                                     <c:if test="${album == null}">
-                                        <option selected>Seleccione un artista</option>
+                                        <option value="">Seleccione un artista</option>
                                     </c:if>
                                     <c:forEach var="artist" items="${listaArtist}">
                                         <option value="<c:out value='${artist.artistId}' />"><c:out value='${artist.name}' /></option>

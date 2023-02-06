@@ -1,6 +1,7 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * Author     : Jefferson Eduardo Campo - Hector Esteban Coral- Danny Alberto Diaz
  */
 package edu.unicauca.apliweb.control;
 
@@ -198,7 +199,7 @@ public class ServletAppGeneral extends HttpServlet {
 //Edita el cliente en la BD
             artistJPA.edit(art);
         } catch (Exception ex) {
-            Logger.getLogger(ServletAppArtists.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServletAppGeneral.class.getName()).log(Level.SEVERE, null, ex);
         }
         response.sendRedirect("list");
     }
@@ -214,7 +215,7 @@ public class ServletAppGeneral extends HttpServlet {
             dispatcher = request.getRequestDispatcher("list");
             artistJPA.destroy(id);
         } catch (NonexistentEntityException ex) {
-            Logger.getLogger(ServletAppArtists.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServletAppGeneral.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalOrphanException e){
             request.setAttribute("loginError","Captura de error :"+e.getMessage());
             System.out.println("*******************");
@@ -298,13 +299,17 @@ public class ServletAppGeneral extends HttpServlet {
             dispatcher = request.getRequestDispatcher("albums");
             response.sendRedirect("albums");
         }  catch (RuntimeException re){
-            dispatcher = request.getRequestDispatcher("artist-form.jsp");
+            List<Artist> listaArtistas = artistJPA.findArtistEntities();
+            request.setAttribute("listaArtist",listaArtistas );
+            dispatcher = request.getRequestDispatcher("album-form.jsp");
             request.setAttribute("loginError","Captura de error :"+re.getMessage());
             System.out.println("*******************");
             System.out.println("lance la excepción");
             System.out.println("*******************");
         } catch (PreexistingEntityException pre){
-            dispatcher = request.getRequestDispatcher("artist-form.jsp");
+            List<Artist> listaArtistas = artistJPA.findArtistEntities();
+            request.setAttribute("listaArtist",listaArtistas );
+            dispatcher = request.getRequestDispatcher("album-form.jsp");
             request.setAttribute("loginError","Captura de error :"+pre.getMessage());
             System.out.println("*******************");
             System.out.println("lance la excepción");
@@ -338,7 +343,7 @@ public class ServletAppGeneral extends HttpServlet {
             System.out.println(al.getArtistId().getName());
             albumJPA.edit(al);
         } catch (Exception ex) {
-            Logger.getLogger(ServletAppAlbum.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServletAppGeneral.class.getName()).log(Level.SEVERE, null, ex);
         }
         response.sendRedirect("albums");
     }
@@ -354,7 +359,7 @@ public class ServletAppGeneral extends HttpServlet {
             dispatcher = request.getRequestDispatcher("albums");
             albumJPA.destroy(id);  
         } catch (NonexistentEntityException ex) {
-            Logger.getLogger(ServletAppArtists.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServletAppGeneral.class.getName()).log(Level.SEVERE, null, ex);
         } catch (RuntimeException re){
             request.setAttribute("loginError","Captura de error :"+re.getMessage());
             System.out.println("*******************");
@@ -397,9 +402,9 @@ public class ServletAppGeneral extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (IllegalOrphanException ex) {
-            Logger.getLogger(ServletAppArtists.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServletAppGeneral.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(ServletAppArtists.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServletAppGeneral.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -417,9 +422,9 @@ public class ServletAppGeneral extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (IllegalOrphanException ex) {
-            Logger.getLogger(ServletAppArtists.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServletAppGeneral.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(ServletAppArtists.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServletAppGeneral.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -1,7 +1,7 @@
 <%-- 
     Document   : artist-form
     Created on : 25/01/2023, 3:06:28 p. m.
-    Author     : jefer
+    Author     : Jefferson Eduardo Campo - Hector Esteban Coral- Danny Alberto Diaz
 --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -24,7 +24,7 @@
         <header>
             <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #092168">
                 <div>
-                    <a href="https://www.unicauca.edu.co" class="navbar-brand"> App Music </a>
+                    <a href="#" class="navbar-brand"> App Music </a>
                 </div>
                 <ul class="navbar-nav">
                     <li><a href="<%=request.getContextPath()%>/list" class="nav-link">Lista Artist</a></li>

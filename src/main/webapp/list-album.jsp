@@ -1,7 +1,7 @@
 <%-- 
     Document   : list-album
     Created on : 25/01/2023, 1:23:44 p. m.
-    Author     : Danny
+    Author     : Jefferson Eduardo Campo - Hector Esteban Coral- Danny Alberto Diaz
 --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
