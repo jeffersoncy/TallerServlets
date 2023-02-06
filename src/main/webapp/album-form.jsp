@@ -71,7 +71,7 @@
                             <fieldset class="form-group">
                                 <label>Artista</label>
                                 <br>
-                                <select name="artist" class="form-select" aria-label="seleccione">
+                                <select name="artist" class="form-select" aria-label="seleccione" style="width: 100%">
 
                                     <c:if test="${album == null}">
                                         <option selected>Seleccione un artista</option>
